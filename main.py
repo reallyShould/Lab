@@ -45,3 +45,30 @@ print('Размах:                ', n[-1] - n[0])
 
 pypl.bar(x=n, height=x, bottom=0)
 pypl.show()
+
+print('\n2 ЗАДАНИЕ\n'
+      '___________________________________________')
+print()
+
+
+def meanProfitFind():
+    meanIncome = 3500 / 1000
+
+    meanProfitTMP1 = vMid - stand
+    meanProfitTMP2 = vMid + stand
+
+    result2 = False
+
+    if meanProfitTMP1 < meanIncome < meanProfitTMP2:
+        result2 = True
+    else:
+        result2 = False
+
+    print(f'{round(meanProfitTMP1, 2)} < {meanIncome} < {round(meanProfitTMP2, 2)}')
+    if result2:
+        print('Неравнество ВЕРНО, прибыль равна предполагаемой!')
+    else:
+        print('Неравнество НЕВЕРНО, прибыль НЕ равна предполагаемой!')
+
+
+meanProfitFind()
