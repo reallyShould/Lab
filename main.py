@@ -27,10 +27,7 @@ for i in range(len(n)):
 depression /= len(variables) - 1
 
 #стандартное отклонение
-stand = 0
-for i in range(len(n)):
-    stand += (x[i] - vMid)**2
-stand = (stand/len(variables))**0.5
+stand = depression**0.5
 
 print('Варианты       ', n)
 print('Частота        ', x)
