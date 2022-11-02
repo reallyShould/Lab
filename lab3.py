@@ -5,19 +5,19 @@ import matplotlib
 from matplotlib.widgets import RadioButtons
 from sklearn.linear_model import LinearRegression
 
-model = LinearRegression()
-matplotlib.rcParams['lines.linewidth'] = 2
-matplotlib.rcParams['lines.linestyle'] = '-'
-matplotlib.rcParams.update({'font.size': 7})
-plt.style.use('bmh')
-pd.set_option('display.max_columns', 20)
-pd.set_option('display.width', 2000)
+matplotlib.rcParams['lines.linewidth'] = 2 # настройка толщины линий графиков
+matplotlib.rcParams['lines.linestyle'] = '-' # прямой стиль линий
+matplotlib.rcParams.update({'font.size': 7}) # размер шрифта
+plt.style.use('bmh') # делает на фоне сетку
+pd.set_option('display.max_columns', 20) # позволяет показывать больше столбцов в консольном виде
+pd.set_option('display.width', 2000) # ширина таблицы в консоле
 
-exl = pd.read_excel('sheetEmpty.xlsx', index_col=0, na_filter=True)
-fig, ax = plt.subplots(1, figsize=(13, 7))
-plt.subplots_adjust(left=0.3)
-exlData = pd.DataFrame(exl)
+exl = pd.read_excel('sheetEmpty.xlsx', index_col=0, na_filter=True) # открытие таблицы
+fig, ax = plt.subplots(1, figsize=(13, 7)) # добавляет области где ax внутренняя, а fig внешняя
+plt.subplots_adjust(left=0.3) # выравнивание областей
+exlData = pd.DataFrame(exl) # конвертация в Pandas(ну или нет)
 
+# список месяцов
 x = ('январь',
      'февраль',
      'март',
@@ -32,7 +32,7 @@ x = ('январь',
      'декабрь'
      )
 
-exlData = exlData.fillna(0)
+exlData = exlData.fillna(0) # заменяет поля NaN на 0
 
 for year in range(0, 6):
     i = 0
@@ -106,7 +106,7 @@ year2022 = exlData.iloc[:, 5].values
 year2023 = exlData.iloc[:, 6].values
 year2024 = exlData.iloc[:, 7].values
 
-# значения сезонов
+# выделение значений сезонов
 seasWinter = np.append(exlData.iloc[11, 0:6].values, exlData.iloc[0:2, 0:6].values)
 seasSpring = exlData.iloc[2:5, 0:6].values
 seasSummer = exlData.iloc[5:8, 0:6].values
@@ -115,10 +115,10 @@ seasAutumn = exlData.iloc[8:11, 0:6].values
 
 # нажатие на RadioButton
 def click(label):
-    ax.clear()
+    ax.clear() # убирает графики
     if label == "2017":
-        ax.plot(x, year2017, lw=2, color='dodgerblue')
-        ax.set_title("2017", c='dodgerblue')
+        ax.plot(x, year2017, lw=2, color='dodgerblue') # создает графики с нужными значениями
+        ax.set_title("2017", c='dodgerblue') # заголовок
 
     elif label == "All":
         ax.set_title("2017-2024")
@@ -154,9 +154,9 @@ def click(label):
 
     elif label == "Linear Regression Winter":
         mon = np.array([[1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2], [3, 3, 3, 3, 3, 3]])
-        ax.scatter(mon, seasWinter, color='gray') # точки
-        ax.plot([mon.min(), mon.max()], [seasWinter.min(), seasWinter.max()], 'k--') # линия
-        ax.set_title("Linear Regression Winter", c='red')
+        ax.scatter(mon, seasWinter, color='gray') # рисует точки графиков
+        ax.plot([mon.min(), mon.max()], [seasWinter.min(), seasWinter.max()], 'k--') # рисует регрессию
+        ax.set_title("Linear Regression Winter", c='red') # заголовок
 
     elif label == "Linear Regression Spring":
         mon = np.array([[1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2], [3, 3, 3, 3, 3, 3]])
@@ -187,6 +187,7 @@ radio = RadioButtons(rax, ('All', '2017', '2018', '2019', '2020', '2021', '2022'
                            'Linear Regression Summer', 'Linear Regression Autumn'), activecolor='k') # создание кнопок
 plt.title(r'Store income')
 
+# года справа графика
 plt.figtext(0.93, 0.65, '2024', size=12, c='mediumspringgreen')
 plt.figtext(0.93, 0.60, '2023', size=12, c='aqua')
 plt.figtext(0.93, 0.55, '2022', size=12, c='lightpink')
@@ -198,6 +199,6 @@ plt.figtext(0.93, 0.30, '2017', size=12, c='dodgerblue')
 
 ax.plot(exlData)
 ax.set_title("2017-2024")
-radio.on_clicked(click)
+radio.on_clicked(click) # обработка нажатия
 
-plt.show()
+plt.show() # вывод всего
