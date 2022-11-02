@@ -105,7 +105,9 @@ s6 = exlData.iloc[:, 5].values
 s7 = exlData.iloc[:, 6].values
 s8 = exlData.iloc[:, 7].values
 
-seasWinter = np.append(exlData.iloc[0:2, 0:6].values, exlData.iloc[11, 0:6].values)
+#seasWinter = np.append(exlData.iloc[0:2, 0:6].values, exlData.iloc[11, 0:6].values)
+seasWinter = np.append(exlData.iloc[11, 0:6].values, exlData.iloc[0:2, 0:6].values)
+#seasWinter = exlData.iloc[[11, 0, 1], 0:6]
 seasSpring = exlData.iloc[2:5, 0:6].values
 seasSummer = exlData.iloc[5:8, 0:6].values
 seasAutumn = exlData.iloc[8:11, 0:6].values
