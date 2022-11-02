@@ -47,7 +47,7 @@ for year in range(0, 6):
         i += 1
 
 month = 0
-for khk in range(0, 12):  # 2023
+for khk in range(0, 12):  # Расчет 2023
     tmp = [2017, 2018, 2019, 2020, 2021, 2022]
     middleX = (2017 + 2018 + 2019 + 2020 + 2021 + 2022) / 6
 
@@ -72,7 +72,7 @@ for khk in range(0, 12):  # 2023
     month += 1
 
 month = 0
-for khk in range(0, 12):  # 2024
+for khk in range(0, 12):  # Расчет 2024
     tmp = [2017, 2018, 2019, 2020, 2021, 2022, 2023]
     middleX = (2017 + 2018 + 2019 + 2020 + 2021 + 2022 + 2023) / 7
 
@@ -96,25 +96,28 @@ for khk in range(0, 12):  # 2024
     exlData.iloc[:, 7].values[month] = res
     month += 1
 
-s1 = exlData.iloc[:, 0].values
-s2 = exlData.iloc[:, 1].values
-s3 = exlData.iloc[:, 2].values
-s4 = exlData.iloc[:, 3].values
-s5 = exlData.iloc[:, 4].values
-s6 = exlData.iloc[:, 5].values
-s7 = exlData.iloc[:, 6].values
-s8 = exlData.iloc[:, 7].values
+# значения годов
+year2017 = exlData.iloc[:, 0].values
+year2018 = exlData.iloc[:, 1].values
+year2019 = exlData.iloc[:, 2].values
+year2020 = exlData.iloc[:, 3].values
+year2021 = exlData.iloc[:, 4].values
+year2022 = exlData.iloc[:, 5].values
+year2023 = exlData.iloc[:, 6].values
+year2024 = exlData.iloc[:, 7].values
 
+# значения сезонов
 seasWinter = np.append(exlData.iloc[11, 0:6].values, exlData.iloc[0:2, 0:6].values)
 seasSpring = exlData.iloc[2:5, 0:6].values
 seasSummer = exlData.iloc[5:8, 0:6].values
 seasAutumn = exlData.iloc[8:11, 0:6].values
 
 
+# нажатие на RadioButton
 def click(label):
     ax.clear()
     if label == "2017":
-        ax.plot(x, s1, lw=2, color='dodgerblue')
+        ax.plot(x, year2017, lw=2, color='dodgerblue')
         ax.set_title("2017", c='dodgerblue')
 
     elif label == "All":
@@ -122,37 +125,37 @@ def click(label):
         ax.plot(exlData)
 
     elif label == "2018":
-        ax.plot(x, s2, lw=2, color='firebrick')
+        ax.plot(x, year2018, lw=2, color='firebrick')
         ax.set_title("2018", c='firebrick')
 
     elif label == "2019":
-        ax.plot(x, s3, lw=2, color='mediumpurple')
+        ax.plot(x, year2019, lw=2, color='mediumpurple')
         ax.set_title("2019", c='mediumpurple')
 
     elif label == "2020":
-        ax.plot(x, s4, lw=2, color='seagreen')
+        ax.plot(x, year2020, lw=2, color='seagreen')
         ax.set_title("2020", c='seagreen')
 
     elif label == "2021":
-        ax.plot(x, s5, lw=2, color='coral')
+        ax.plot(x, year2021, lw=2, color='coral')
         ax.set_title("2021", c='coral')
 
     elif label == "2022":
-        ax.plot(x, s6, lw=2, color='lightpink')
+        ax.plot(x, year2022, lw=2, color='lightpink')
         ax.set_title("2022", c='lightpink')
 
     elif label == "2023":
-        ax.plot(x, s7, lw=2, color='aqua')
+        ax.plot(x, year2023, lw=2, color='aqua')
         ax.set_title("2023", c='aqua')
 
     elif label == "2024":
-        ax.plot(x, s8, lw=2, color='mediumspringgreen')
+        ax.plot(x, year2024, lw=2, color='mediumspringgreen')
         ax.set_title("2024", c='mediumspringgreen')
 
     elif label == "Linear Regression Winter":
         mon = np.array([[1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2], [3, 3, 3, 3, 3, 3]])
-        ax.scatter(mon, seasWinter, color='gray')
-        ax.plot([mon.min(), mon.max()], [seasWinter.min(), seasWinter.max()], 'k--')
+        ax.scatter(mon, seasWinter, color='gray') # точки
+        ax.plot([mon.min(), mon.max()], [seasWinter.min(), seasWinter.max()], 'k--') # линия
         ax.set_title("Linear Regression Winter", c='red')
 
     elif label == "Linear Regression Spring":
@@ -176,12 +179,12 @@ def click(label):
     plt.draw()
 
 
-print(exlData)
+print(exlData) # вывод таблицы
 
 rax = plt.axes([0.02, 0.55, 0.20, 0.35], facecolor='white')
 radio = RadioButtons(rax, ('All', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024',
                            'Linear Regression Winter', 'Linear Regression Spring',
-                           'Linear Regression Summer', 'Linear Regression Autumn'), activecolor='k')
+                           'Linear Regression Summer', 'Linear Regression Autumn'), activecolor='k') # создание кнопок
 plt.title(r'Store income')
 
 plt.figtext(0.93, 0.65, '2024', size=12, c='mediumspringgreen')
