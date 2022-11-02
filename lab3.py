@@ -5,7 +5,6 @@ import matplotlib
 from matplotlib.widgets import RadioButtons
 from sklearn.linear_model import LinearRegression
 
-
 model = LinearRegression()
 matplotlib.rcParams['lines.linewidth'] = 2
 matplotlib.rcParams['lines.linestyle'] = '-'
@@ -14,41 +13,41 @@ plt.style.use('bmh')
 pd.set_option('display.max_columns', 20)
 pd.set_option('display.width', 2000)
 
-exl = pd.read_excel('sheetEmpty.xlsx',index_col=0, na_filter=1)
-fig, ax = plt.subplots(1, figsize=(13,7))
+exl = pd.read_excel('sheetEmpty.xlsx', index_col=0, na_filter=True)
+fig, ax = plt.subplots(1, figsize=(13, 7))
 plt.subplots_adjust(left=0.3)
 exlData = pd.DataFrame(exl)
 
 x = ('январь',
-    'февраль',
-    'март',
-    'апрель',
-    'май',
-    'июнь',
-    'июль',
-    'август',
-    'сентябрь',
-    'октябрь',
-    'ноябрь',
-    'декабрь'
-            )
+     'февраль',
+     'март',
+     'апрель',
+     'май',
+     'июнь',
+     'июль',
+     'август',
+     'сентябрь',
+     'октябрь',
+     'ноябрь',
+     'декабрь'
+     )
 
 exlData = exlData.fillna(0)
 
-for year in range(0,6):
+for year in range(0, 6):
     i = 0
     for na in exlData.iloc[:, year].values:
         if na < 0.1:
-            minus = exlData.iloc[:, year+1].values[0] - exlData.iloc[:, year].values[0]
-            procent = minus / exlData.iloc[:, year+1].values[0] * 100
-            tmp = exlData.iloc[:, year+1].values[i] / 100 * procent
-            na = exlData.iloc[:, year+1].values[i] - tmp
-            na = round(na,0)
+            minus = exlData.iloc[:, year + 1].values[0] - exlData.iloc[:, year].values[0]
+            procent = minus / exlData.iloc[:, year + 1].values[0] * 100
+            tmp = exlData.iloc[:, year + 1].values[i] / 100 * procent
+            na = exlData.iloc[:, year + 1].values[i] - tmp
+            na = round(na, 0)
             exlData.iloc[:, year].values[i] = na
         i += 1
 
 month = 0
-for khk in range(0, 12): #2023
+for khk in range(0, 12):  # 2023
     tmp = [2017, 2018, 2019, 2020, 2021, 2022]
     middleX = (2017 + 2018 + 2019 + 2020 + 2021 + 2022) / 6
 
@@ -64,7 +63,7 @@ for khk in range(0, 12): #2023
     bT2 = 0
     for i in tmp:
         bT2 += (i - middleX) ** 2
-    b = bT1/bT2
+    b = bT1 / bT2
 
     a = middleY - b * middleX
 
@@ -73,7 +72,7 @@ for khk in range(0, 12): #2023
     month += 1
 
 month = 0
-for khk in range(0, 12): #2024
+for khk in range(0, 12):  # 2024
     tmp = [2017, 2018, 2019, 2020, 2021, 2022, 2023]
     middleX = (2017 + 2018 + 2019 + 2020 + 2021 + 2022 + 2023) / 7
 
@@ -111,6 +110,7 @@ seasSpring = exlData.iloc[2:5, 0:6].values
 seasSummer = exlData.iloc[5:8, 0:6].values
 seasAutumn = exlData.iloc[8:11, 0:6].values
 
+
 def click(label):
     ax.clear()
     if label == "2017":
@@ -118,7 +118,7 @@ def click(label):
         ax.set_title("2017", c='dodgerblue')
 
     elif label == "All":
-        ax.set_title("2017-2023")
+        ax.set_title("2017-2024")
         ax.plot(exlData)
 
     elif label == "2018":
@@ -175,12 +175,13 @@ def click(label):
 
     plt.draw()
 
+
 print(exlData)
 
 rax = plt.axes([0.02, 0.55, 0.20, 0.35], facecolor='white')
 radio = RadioButtons(rax, ('All', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024',
                            'Linear Regression Winter', 'Linear Regression Spring',
-                           'Linear Regression Summer','Linear Regression Autumn'), activecolor='k')
+                           'Linear Regression Summer', 'Linear Regression Autumn'), activecolor='k')
 plt.title(r'Store income')
 
 plt.figtext(0.93, 0.65, '2024', size=12, c='mediumspringgreen')
