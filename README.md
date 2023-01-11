@@ -15,7 +15,7 @@
 <br/>
 ![image](https://user-images.githubusercontent.com/77869589/211699383-62fac6a1-b48f-4137-a9ae-25aa4d63481f.png)
  
-Ищем зависимость RM от PRICE и выводим графически
+Ищем коэффицент потерь RM от PRICE и выводим графически
 <br/>
 ![image](https://user-images.githubusercontent.com/77869589/211699849-89ff1a4c-3303-4d3b-85c0-e7d48bf70b1c.png)
 
@@ -51,9 +51,13 @@
 <br/>
 ![image](https://user-images.githubusercontent.com/77869589/211706326-23d092f9-566a-4014-81bf-ec52423311e9.png)
 
+Выводим среднеквадратичную и абсолютную потерю с помощью предсказания
+<br/>
+![image](https://user-images.githubusercontent.com/77869589/211707275-f2dd947e-c6a7-4d4a-a199-fdc8bbb94222.png)
 
-
-
+Расчитываем кластеризацию с помощью KMeans записываем в список и выводим графически
+<br/>
+![image](https://user-images.githubusercontent.com/77869589/211708036-c0ab52b3-f6eb-45d7-95a1-c787648c4945.png)
 
 
 
